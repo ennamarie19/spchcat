@@ -1,0 +1,8 @@
+image: ghcr.io/ennamarie19/spchcat-fuzz:latest
+project: spchcat
+target: spchcat-fuzz
+tests:
+    - file://corpus
+
+cmds:
+    - cmd: /spchcat --languages_dir=/models @@
