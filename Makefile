@@ -9,6 +9,7 @@ CCFLAGS := \
   -Isrc/audio \
   -Isrc/third_party \
   -Isrc/utils \
+  -I/usr/lib \
   -Ibuild/lib
 
 LDFLAGS := \
