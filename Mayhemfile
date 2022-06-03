@@ -1,8 +1,12 @@
 image: ghcr.io/ennamarie19/spchcat-fuzz:latest
 project: spchcat
-target: spchcat-fuzz
-tests:
+target: spchcat
+testsuite:
     - file://corpus
 
 cmds:
-    - cmd: /spchcat --languages_dir=/models @@
+    - cmd: /spchcat --languages_dir=/models /dev/stdin
+      afl: true
+      max_length: 88000
+      env:
+        DISABLE_SMOKETEST: '1'
