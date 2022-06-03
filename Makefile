@@ -1,4 +1,7 @@
-CC := gcc
+ifeq (${BUILD_FOR_AFL}, 1)
+	CC := afl-clang-fast
+else()
+	CC := gcc
 CCFLAGS := \
   -std=c99 \
   -Wall \
