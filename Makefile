@@ -1,8 +1,3 @@
-ifeq ($(BUILD_FOR_AFL), 1)
-	CC := afl-clang-fast
-else
-	CC := gcc
-endif
 CCFLAGS := \
   -std=c99 \
   -Wall \
@@ -36,6 +31,12 @@ TEST_CCFLAGS := \
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)$*.d
 TEST_DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)$*_test.d
 
+ifeq ($(BUILD_FOR_AFL), 1)
+	CC := afl-clang-fast
+	CCFLAGS := $(filter-out -Werror, $(CCFLAGS))
+else
+	CC := gcc
+endif
 BUILDDIR = build/
 OBJDIR := $(BUILDDIR)obj/
 BINDIR := $(BUILDDIR)bin/
