@@ -18,16 +18,16 @@ LDFLAGS := \
   -lpulse \
   -lpulse-simple
 
-TEST_CCFLAGS := \
-  -fsanitize=address \
-  -fsanitize=undefined \
-  -fno-sanitize-recover=all \
-  -fsanitize=float-divide-by-zero \
-  -fsanitize=float-cast-overflow \
-  -fno-sanitize=null \
-  -fno-sanitize=alignment \
-  -fno-omit-frame-pointer
-
+#TEST_CCFLAGS := \
+#  -fsanitize=address \
+#  -fsanitize=undefined \
+#  -fno-sanitize-recover=all \
+#  -fsanitize=float-divide-by-zero \
+#  -fsanitize=float-cast-overflow \
+#  -fno-sanitize=null \
+#  -fno-sanitize=alignment \
+#  -fno-omit-frame-pointer
+TEST_CCFLAGS :=
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)$*.d
 TEST_DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)$*_test.d
 
