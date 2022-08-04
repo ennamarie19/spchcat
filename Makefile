@@ -1,3 +1,4 @@
+CC := gcc
 CCFLAGS := \
   -std=c99 \
   -Wall \
@@ -18,25 +19,24 @@ LDFLAGS := \
   -lpulse \
   -lpulse-simple
 
-#TEST_CCFLAGS := \
-#  -fsanitize=address \
-#  -fsanitize=undefined \
-#  -fno-sanitize-recover=all \
-#  -fsanitize=float-divide-by-zero \
-#  -fsanitize=float-cast-overflow \
-#  -fno-sanitize=null \
-#  -fno-sanitize=alignment \
-#  -fno-omit-frame-pointer
-TEST_CCFLAGS :=
+TEST_CCFLAGS := \
+  -fsanitize=address \
+  -fsanitize=undefined \
+  -fno-sanitize-recover=all \
+  -fsanitize=float-divide-by-zero \
+  -fsanitize=float-cast-overflow \
+  -fno-sanitize=null \
+  -fno-sanitize=alignment \
+  -fno-omit-frame-pointer
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)$*.d
 TEST_DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)$*_test.d
 
 ifeq ($(BUILD_FOR_AFL), 1)
 	CC := afl-clang-fast
+	TEST_CCFLAGS :=
 	CCFLAGS := $(filter-out -Werror, $(CCFLAGS))
-else
-	CC := gcc
 endif
+
 BUILDDIR = build/
 OBJDIR := $(BUILDDIR)obj/
 BINDIR := $(BUILDDIR)bin/
